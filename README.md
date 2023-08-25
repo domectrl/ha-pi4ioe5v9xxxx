@@ -18,14 +18,14 @@ For more details about the pi4ioe5v9xxxx I2C I/O port expander you can find the 
 - [PI4IOE5V9674](https://www.diodes.com/assets/Datasheets/PI4IOE5V9674.pdf)
 - [PI4IOE5V9673](https://www.diodes.com/assets/Datasheets/PI4IOE5V9673.pdf)
 - [PI4IOE5V96224](https://www.diodes.com/assets/Datasheets/PI4IOE5V96224.pdf)
-- [PI4IOE5V96248](https://www.diodes.com/assets/Datasheets/PI4IOE5V96248.pdf).
+- [PI4IOE5V96248](https://www.diodes.com/assets/Datasheets/PI4IOE5V96248.pdf)
 
 **This integration can set up the following platforms.**
 
 Platform | Description
 -- | --
-`binary_sensor` | Reads digital inputs from Digital.com I/O expanders (PI4IOE5V9570, PI4IOE5V9674, PI4IOE5V9673, PI4IOE5V96224,  PI4IOE5V96248). The pin numbers are from 1 to X where: 1-8 correspond to port 0 (00-07) and 9-16 to port 1, etc.
-`switch` | Writes digital outputs from Digital.com IO expanders (PI4IOE5V9570, PI4IOE5V9674, PI4IOE5V9673, PI4IOE5V96224,  PI4IOE5V96248).
+`binary_sensor` | Reads digital inputs from Digital.com I/O expanders. The pin numbers are from 1 to X where: 1-8 correspond to port 0 (00-07) and 9-16 to port 1, etc.
+`switch` | Writes digital outputs from Digital.com IO expanders. The pin numbers are from 1 to X where: 1-8 correspond to port 0 (00-07) and 9-16 to port 1, etc.
 
 
 ## Installation

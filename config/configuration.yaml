@@ -5,4 +5,34 @@ default_config:
 logger:
   default: info
   logs:
-    custom_components.integration_blueprint: debug
+    custom_components.pi4ioe5v9xxxx: debug
+
+binary_sensor:
+- platform: pi4ioe5v9xxxx
+  i2c_bus: 1
+  i2c_address: 0x20
+  bits: 16
+  pins:
+    1: Pin_01/PI0_0
+    2: Pin_02/PI0_1
+    3: Pin_03/PI0_2
+    4: Pin_04/PI0_3
+    5: Pin_05/PI0_4
+    6: Pin_06/PI0_5
+    7: Pin_07/PI0_6
+    8: Pin_08/PI0_7
+
+switch:
+- platform: pi4ioe5v9xxxx
+  i2c_bus: 1
+  i2c_address: 0x20
+  bits: 16
+  pins:
+    9: Pin_09/PI1_0
+    10: Pin_10/PI1_1
+    11: Pin_11/PI1_2
+    12: Pin_12/PI1_3
+    13: Pin_13/PI1_4
+    14: Pin_14/PI1_5
+    15: Pin_15/PI1_6
+    16: Pin_16/PI1_7

@@ -1,13 +1,14 @@
 {
   "domain": "pi4ioe5v9xxxx",
   "name": "PI4IOE5V9xxxx IO Expander",
-  "documentation": "https://github.com/antonverburg/ha_pi4ioe5v9xxxx/blob/main/README.md",
-  "requirements": [
-    "pi4ioe5v9xxxx_drv==0.0.3"
-  ],
   "codeowners": [
     "@antonverburg"
   ],
+  "documentation": "https://github.com/antonverburg/ha_pi4ioe5v9xxxx/",
+  "issue_tracker": "https://github.com/antonverburg/ha_pi4ioe5v9xxxx/issues",
   "iot_class": "local_polling",
+  "requirements": [
+    "pi4ioe5v9xxxx_drv==0.0.3"
+  ],
   "version": "0.9.0"
 }

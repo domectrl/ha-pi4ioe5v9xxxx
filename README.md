@@ -79,35 +79,18 @@ switch:
 ```
 
 ### Configuration parameters
-pins:
-  description: List of used pins.
-  required: true
-  type: map
-  keys:
-    "pin: name":
-      description: The pin numbers (from 1 to X) and corresponding names.
-      required: true
-      type: [integer, string]
-i2c_bus:
-  description: i2c bus containing the pi4ioe5v9xxxx chip.
-  required: false
-  type: integer
-  default: "`1`"
-i2c_address:
-  description: i2c address of pi4ioe5v9xxxx chip.
-  required: false
-  type: integer
-  default: "`0x20`"
-bits:
-  description: number of bits of pi4ioe5v9xxxx chip, see particular datasheet for your device for the right number.
-  required: false
-  type: integer
-  default: "`24`"
-invert_logic:
-  description: If `true`, inverts the output logic to ACTIVE LOW.
-  required: false
-  type: boolean
-  default: "`false` (ACTIVE HIGH)"
+- pins: List of used pins.
+  > required: true | type: map
+  - keys ("pin: name"): The pin numbers (from 1 to X) and corresponding names.
+    > required: true | type: [integer, string]
+- i2c_bus: i2c bus containing the pi4ioe5v9xxxx chip.
+  > required: false | type: integer | default: "`1`"
+- i2c_address: i2c address of pi4ioe5v9xxxx chip.
+  > required: false | type: integer | default: "`0x20`"
+- bits: number of bits of pi4ioe5v9xxxx chip, see particular datasheet for your device for the right number.
+  > required: false | type: integer | default: "`24`"
+- invert_logic: If `true`, inverts the output logic to ACTIVE LOW.
+  > required: false | type: boolean | default: "`false` (ACTIVE HIGH)"
 
 
 ### Full configuration example

@@ -10,5 +10,5 @@
   "requirements": [
     "pi4ioe5v9xxxx_drv==0.0.4"
   ],
-  "version": "0.9.0"
+  "version": "0.9.1"
 }

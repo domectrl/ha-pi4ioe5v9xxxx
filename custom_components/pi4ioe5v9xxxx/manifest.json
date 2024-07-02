@@ -2,11 +2,11 @@
   "domain": "pi4ioe5v9xxxx",
   "name": "PI4IOE5V9xxxx IO Expander",
   "codeowners": [
-    "@antonverburg"
+    "@domectrl"
   ],
-  "documentation": "https://github.com/antonverburg/ha_pi4ioe5v9xxxx/",
+  "documentation": "https://github.com/domectrl/ha_pi4ioe5v9xxxx/",
   "iot_class": "local_polling",
-  "issue_tracker": "https://github.com/antonverburg/ha_pi4ioe5v9xxxx/issues",
+  "issue_tracker": "https://github.com/domectrl/ha_pi4ioe5v9xxxx/issues",
   "requirements": [
     "pi4ioe5v9xxxx_drv==0.0.4"
   ],

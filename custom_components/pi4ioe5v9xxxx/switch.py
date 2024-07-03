@@ -58,7 +58,12 @@ def setup_platform(
 class Pi4ioe5v9Switch(SwitchEntity):
     """Representation of a  pi4ioe5v9 IO expansion IO."""
 
-    def __init__(self, name: str, pin: ConfigType, *, invert_logic: bool) -> None:
+    def __init__(
+      self, name: str,
+      pin: ConfigType,
+      *,
+      invert_logic:bool = False
+    ) -> None:
         """Initialize the pin."""
         self._name = name or DEVICE_DEFAULT_NAME
         self._pin = pin

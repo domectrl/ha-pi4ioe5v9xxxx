@@ -1,10 +1,12 @@
 """Support for binary sensor using RPi GPIO."""
-from pi4ioe5v9xxxx_drv import pi4ioe5v9xxxx_drv as pi4ioe5v9xxxx
+import homeassistant.helpers.config_validation as cv
 import voluptuous as vol
-
 from homeassistant.components.binary_sensor import PLATFORM_SCHEMA, BinarySensorEntity
 from homeassistant.const import DEVICE_DEFAULT_NAME
-import homeassistant.helpers.config_validation as cv
+from homeassistant.core import HomeAssistant
+from homeassistant.helpers.entity_platform import AddEntitiesCallback
+from homeassistant.helpers.typing import ConfigType, DiscoveryInfoType
+from pi4ioe5v9xxxx_drv import pi4ioe5v9xxxx_drv as pi4ioe5v9xxxx
 
 CONF_INVERT_LOGIC = "invert_logic"
 CONF_PINS = "pins"
@@ -30,7 +32,11 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
 )
 
 
-def setup_platform(hass, config, add_entities, discovery_info=None):
+def setup_platform( hass: HomeAssistant,  # noqa: ARG001
+    config: ConfigType,
+    add_entities: AddEntitiesCallback,
+    discovery_info: DiscoveryInfoType | None = None,  # noqa: ARG001
+) -> None:
     """Set up the IO expander devices."""
     pins = config[CONF_PINS]
     binary_sensors = []
@@ -46,13 +52,13 @@ def setup_platform(hass, config, add_entities, discovery_info=None):
         binary_sensors.append(
             Pi4ioe5v9BinarySensor(pin_name, pin_num, config[CONF_INVERT_LOGIC])
         )
-    add_entities(binary_sensors, True)
+    add_entities(binary_sensors, update_before_add = True)
 
 
 class Pi4ioe5v9BinarySensor(BinarySensorEntity):
     """Represent a binary sensor that uses pi4ioe5v9xxxx IO expander in read mode."""
 
-    def __init__(self, name, pin, invert_logic):
+    def __init__(self, name: str, pin: ConfigType, *, invert_logic: bool) -> None:
         """Initialize the pi4ioe5v9xxxx sensor."""
         self._name = name or DEVICE_DEFAULT_NAME
         self._pin = pin
@@ -60,16 +66,16 @@ class Pi4ioe5v9BinarySensor(BinarySensorEntity):
         self._state = pi4ioe5v9xxxx.pin_from_memory(self._pin)
 
     @property
-    def name(self):
+    def name(self) -> str:
         """Return the name of the sensor."""
         return self._name
 
     @property
-    def is_on(self):
+    def is_on(self) -> bool:
         """Return the state of the entity."""
         return self._state != self._invert_logic
 
-    def update(self):
+    def update(self) -> None:
         """Update the IO state."""
         pi4ioe5v9xxxx.hw_to_memory()
         self._state = pi4ioe5v9xxxx.pin_from_memory(self._pin)

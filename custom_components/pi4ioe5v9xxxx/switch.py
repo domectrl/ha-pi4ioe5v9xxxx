@@ -1,10 +1,12 @@
 """Allows to configure a switch using RPi GPIO."""
-from pi4ioe5v9xxxx_drv import pi4ioe5v9xxxx_drv as pi4ioe5v9xxxx
+import homeassistant.helpers.config_validation as cv
 import voluptuous as vol
-
 from homeassistant.components.switch import PLATFORM_SCHEMA, SwitchEntity
 from homeassistant.const import DEVICE_DEFAULT_NAME
-import homeassistant.helpers.config_validation as cv
+from homeassistant.core import HomeAssistant
+from homeassistant.helpers.entity_platform import AddEntitiesCallback
+from homeassistant.helpers.typing import ConfigType, DiscoveryInfoType
+from pi4ioe5v9xxxx_drv import pi4ioe5v9xxxx_drv as pi4ioe5v9xxxx
 
 CONF_PINS = "pins"
 CONF_INVERT_LOGIC = "invert_logic"
@@ -30,7 +32,11 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
 )
 
 
-def setup_platform(hass, config, add_entities, discovery_info=None):
+def setup_platform(hass: HomeAssistant,  # noqa: ARG001
+    config: ConfigType,
+    add_entities: AddEntitiesCallback,
+    discovery_info: DiscoveryInfoType | None = None,  # noqa: ARG001
+) -> None:
     """Set up the swiches devices."""
     pins = config.get(CONF_PINS)
     switches = []
@@ -50,7 +56,7 @@ def setup_platform(hass, config, add_entities, discovery_info=None):
 class Pi4ioe5v9Switch(SwitchEntity):
     """Representation of a  pi4ioe5v9 IO expansion IO."""
 
-    def __init__(self, name, pin, invert_logic):
+    def __init__(self, name: str, pin: ConfigType, *, invert_logic: bool) -> None:
         """Initialize the pin."""
         self._name = name or DEVICE_DEFAULT_NAME
         self._pin = pin
@@ -58,28 +64,28 @@ class Pi4ioe5v9Switch(SwitchEntity):
         self._state = not invert_logic
 
     @property
-    def name(self):
+    def name(self) -> str:
         """Return the name of the switch."""
         return self._name
 
     @property
-    def should_poll(self):
+    def should_poll(self) -> bool:
         """No polling needed."""
         return False
 
     @property
-    def is_on(self):
+    def is_on(self) -> bool:
         """Return true if device is on."""
         return self._state
 
-    def turn_on(self, **kwargs):
+    def turn_on(self, **kwargs: ConfigType) -> None: # noqa: ARG002
         """Turn the device on."""
         pi4ioe5v9xxxx.pin_to_memory(self._pin, not self._invert_logic)
         pi4ioe5v9xxxx.memory_to_hw()
         self._state = True
         self.schedule_update_ha_state()
 
-    def turn_off(self, **kwargs):
+    def turn_off(self, **kwargs: ConfigType) -> None: # noqa: ARG002
         """Turn the device off."""
         pi4ioe5v9xxxx.pin_to_memory(self._pin, self._invert_logic)
         pi4ioe5v9xxxx.memory_to_hw()

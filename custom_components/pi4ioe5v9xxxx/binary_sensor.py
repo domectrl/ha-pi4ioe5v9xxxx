@@ -1,4 +1,5 @@
 """Support for binary sensor using RPi GPIO."""
+
 import homeassistant.helpers.config_validation as cv
 import voluptuous as vol
 from homeassistant.components.binary_sensor import PLATFORM_SCHEMA, BinarySensorEntity
@@ -32,7 +33,8 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
 )
 
 
-def setup_platform( hass: HomeAssistant,  # noqa: ARG001
+def setup_platform(
+    hass: HomeAssistant,  # noqa: ARG001
     config: ConfigType,
     add_entities: AddEntitiesCallback,
     discovery_info: DiscoveryInfoType | None = None,  # noqa: ARG001
@@ -52,7 +54,7 @@ def setup_platform( hass: HomeAssistant,  # noqa: ARG001
         binary_sensors.append(
             Pi4ioe5v9BinarySensor(pin_name, pin_num, config[CONF_INVERT_LOGIC])
         )
-    add_entities(binary_sensors, update_before_add = True)
+    add_entities(binary_sensors, update_before_add=True)
 
 
 class Pi4ioe5v9BinarySensor(BinarySensorEntity):

@@ -1,4 +1,5 @@
 """Allows to configure a switch using RPi GPIO."""
+
 import homeassistant.helpers.config_validation as cv
 import voluptuous as vol
 from homeassistant.components.switch import PLATFORM_SCHEMA, SwitchEntity
@@ -32,7 +33,8 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
 )
 
 
-def setup_platform(hass: HomeAssistant,  # noqa: ARG001
+def setup_platform(
+    hass: HomeAssistant,  # noqa: ARG001
     config: ConfigType,
     add_entities: AddEntitiesCallback,
     discovery_info: DiscoveryInfoType | None = None,  # noqa: ARG001
@@ -78,14 +80,14 @@ class Pi4ioe5v9Switch(SwitchEntity):
         """Return true if device is on."""
         return self._state
 
-    def turn_on(self, **kwargs: ConfigType) -> None: # noqa: ARG002
+    def turn_on(self, **kwargs: ConfigType) -> None:  # noqa: ARG002
         """Turn the device on."""
         pi4ioe5v9xxxx.pin_to_memory(self._pin, not self._invert_logic)
         pi4ioe5v9xxxx.memory_to_hw()
         self._state = True
         self.schedule_update_ha_state()
 
-    def turn_off(self, **kwargs: ConfigType) -> None: # noqa: ARG002
+    def turn_off(self, **kwargs: ConfigType) -> None:  # noqa: ARG002
         """Turn the device off."""
         pi4ioe5v9xxxx.pin_to_memory(self._pin, self._invert_logic)
         pi4ioe5v9xxxx.memory_to_hw()

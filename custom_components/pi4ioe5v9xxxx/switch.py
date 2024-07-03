@@ -51,7 +51,9 @@ def setup_platform(
         invert=False,
     )
     for pin, name in pins.items():
-        switches.append(Pi4ioe5v9Switch(name, pin, config[CONF_INVERT_LOGIC]))
+        switches.append(
+            Pi4ioe5v9Switch(name, pin, invert_logic=config[CONF_INVERT_LOGIC])
+        )
     add_entities(switches)
 
 
